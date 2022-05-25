@@ -15,8 +15,6 @@ services:
             - ./project/storage/logs/nginx:/var/log/nginx:delegated
             - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:cached
             - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:cached
-            #- ./docker/nginx/conf.d/gzip.conf:/etc/nginx/conf.d/gzip.conf:cached
-            #- ./docker/nginx/certs:/etc/ssl/certs:cached
             - ./docker/nginx/sites-enabled:/etc/nginx/sites-enabled:cached
             - ./docker/nginx/snippets:/etc/nginx/snippets:cached
             - ./docker/nginx/templates:/etc/nginx/templates:cached
@@ -32,6 +30,7 @@ services:
     # composer
     composer-service:
         image: composer/composer:latest
+        #image: arm64v8/composer:2.2
         container_name: p4-comp
         volumes:
             - ./project:/app
@@ -72,19 +71,6 @@ services:
             - .sql.env
         networks:
             - backend
-
-    # mailhog
-    # frontend: http://localhost:8025
-    # api: http://localhost:8025/api/v2/messages (json response)
-    #mailhog-service:
-    #    image: mailhog/mailhog:latest
-    #    container_name: p4-mailhog
-    #    restart: unless-stopped
-    #    ports:
-    #        - "1025:1025"
-    #        - "8025:8025"
-    #    networks:
-    #        - backend
 
 networks:
     backend:
