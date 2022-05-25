@@ -8,7 +8,7 @@ services:
             dockerfile: Dockerfile
         container_name: p4-web
         ports:
-            - "10080:80"
+            - "10081:80"
             #- "10443:443"
         volumes:
             - ./project:/var/www/html
